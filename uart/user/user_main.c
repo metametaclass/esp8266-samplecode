@@ -41,9 +41,9 @@ void ICACHE_FLASH_ATTR user_set_station_config(void)
 //Do nothing function
 static void ICACHE_FLASH_ATTR user_procTask(os_event_t *events)
 {
-	uint8_t buffer[80];
-	int recv_len = -1;
-	int index;
+    uint8_t buffer[80];
+    int recv_len = -1;
+    int index;
 
     switch(events->sig)
     {
@@ -73,8 +73,8 @@ static void ICACHE_FLASH_ATTR user_procTask(os_event_t *events)
 // Timer callback function, called when the timer expires
 void timer_func(void *arg)
 {
-	char *str = (char *) arg;
-	os_printf("\r\nTimer Callback func called with [%s] argument\r\n", str);
+    char *str = (char *) arg;
+    os_printf("\r\nTimer Callback func called with [%s] argument\r\n", str);
 
 
 }
@@ -82,12 +82,12 @@ void timer_func(void *arg)
 // Called once the system intialization is complete
 void post_user_init_func()
 {
-	os_printf("post_user_init_func() called\r\n");
+    os_printf("post_user_init_func() called\r\n");
 
-	// Create a timer which repeats iself and fires every 1 second.
+    // Create a timer which repeats iself and fires every 1 second.
     os_timer_disarm(&timer);
 
-	// Assign a callback function and arm it
+    // Assign a callback function and arm it
     os_timer_setfn(&timer, (os_timer_func_t *) timer_func, test_str);
     //os_timer_arm(&timer, 1500, 1);
 }
@@ -100,9 +100,9 @@ void ICACHE_FLASH_ATTR user_init()
     UART_SetPrintPort(UART0);
 
     user_set_station_config();
-	// register a callback function to let user code know that system
-	// initialization is complete
-	system_init_done_cb(&post_user_init_func);
+    // register a callback function to let user code know that system
+    // initialization is complete
+    system_init_done_cb(&post_user_init_func);
 
     //Start os task
     system_os_task(user_procTask, user_procTaskPrio,user_procTaskQueue, user_procTaskQueueLen);
